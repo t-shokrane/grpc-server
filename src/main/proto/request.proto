@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.atlas.server.forwarder";
+option java_outer_classname = "RequestProto";
+
+message RequestPayload {
+  string corporate_id = 1;
+  string type = 2;
+  string payload = 3;
+}
+
+message ResponsePayload {
+  string corporate_id = 1;
+  bool accepted = 2;
+}
+
+service RequestService {
+  rpc forwardRequest(RequestPayload) returns (ResponsePayload);
+}
