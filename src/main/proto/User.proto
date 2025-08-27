@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "com.example.server";
+option java_package = "com.atlas.server";
 option java_multiple_files = true;
 
 service UserService {

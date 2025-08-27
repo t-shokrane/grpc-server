@@ -1,4 +1,4 @@
-package com.example.server;
+package com.atlas.server;
 
 import io.grpc.stub.StreamObserver;
 import org.springframework.grpc.server.service.GrpcService;

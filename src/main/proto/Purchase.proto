@@ -1,0 +1,50 @@
+package purchase;
+
+option java_package = "com.atlas.purchase";
+option java_multiple_files = true;
+
+service PurchaseService {
+  rpc purchase (PurchaseRequest) returns (PurchaseResponse);
+}
+
+message PurchaseRequest {
+  required string transactionId = 1;             // کد یکتا تراکنش
+  required RequestType requestType = 2;          // نوع درخواست
+  required int64 transactionAmount = 3;          // مبلغ
+  required string transactionCurrency = 4;       // واحد پول
+  required string transactionDate = 5;           // تاریخ تراکنش
+  required AccessMethod accessMethod = 6;        // روش دسترسی
+  required string accessIdentifier = 7;          // شماره کارت، شماره حساب، یا IBAN
+
+  optional string transactionType = 8;           // نوع تراکنش (اختیاری)
+  optional string terminalType = 9;              // نوع ترمینال (اختیاری)
+  optional string terminalId = 10;               // شناسه ترمینال (اختیاری)
+  optional string terminalTraceId = 11;          // شناسه پیگیری ترمینال (اختیاری)
+  optional string originalTransactionId = 12;    // شناسه تراکنش اصلی برای برگشت (اختیاری)
+}
+
+message PurchaseResponse {
+  required string transactionId = 1;             // شناسه تراکنش
+  required TransactionStatus status = 2;         // وضعیت تراکنش
+  required int64 availableBalance = 3;           // مانده در دسترس
+  required int64 actualBalance = 4;              // مانده واقعی
+  optional string tranDescription = 5;           // شرح تراکنش
+}
+
+enum RequestType {
+  PURCHASE = 0;
+  BALANCE_INQUIRY = 1;
+  DEPOSIT_REVERSAL = 2;
+  TRANSFER = 3;
+}
+
+enum AccessMethod {
+  ACCOUNT = 0;
+  IBAN = 1;
+  CARD = 2;
+}
+
+enum TransactionStatus {
+  SUCCESS = 0;
+  FAILURE = 1;
+}
